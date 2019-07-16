@@ -1,0 +1,7 @@
+build_docker_image:
+  stage: build
+  script:
+    - $(aws ecr get-login --no-include-email --region eu-west-1)
+    - docker build -t tabookey-relay-server .
+    - docker tag tabookey-relay-server:$CI_COMMIT_REF_NAME 959807571188.dkr.ecr.eu-west-1.amazonaws.com/tabookey-relay-server:$CI_COMMIT_REF_NAME
+    - docker push 959807571188.dkr.ecr.eu-west-1.amazonaws.com/tabookey-relay-server:$CI_COMMIT_REF_NAME
