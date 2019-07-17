@@ -31,7 +31,7 @@ helm_deploy:
       --namespace dev
       --set image.tag=develop
       --set ingress.hosts[0].host=gaslessrelay.dev.closecross.com
-      --set ingress.hosts[0].paths[0]=""
+      --set ingress.hosts[0].paths[0]="/"
       tabookey-relay-server cc-charts/tabookey-relay-server
   when: manual
   only:
