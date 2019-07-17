@@ -7,12 +7,12 @@ build_docker_image:
     - docker push 959807571188.dkr.ecr.eu-west-1.amazonaws.com/tabookey-relay-server:$CI_COMMIT_REF_NAME
   when: manual
   
-prepare_helm:
+helm_deploy:
   stage: deploy
   script:
     - aws --profile cc-dev eks update-kubeconfig --name cc-dev-eks --region eu-west-1
     - helm init --service-account tiller --tiller-namespace dev --client-only
     - helm repo add cc-charts http://gitlab.closecross.com:8081
     - helm repo update
-    - helm upgrade --install --tiller-namespace dev --namespace dev --name tabookey-relay-server cc-charts/tabookey-relay-server
+    - helm upgrade --install --tiller-namespace dev --namespace dev tabookey-relay-server cc-charts/tabookey-relay-server
   when: manual
