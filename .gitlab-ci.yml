@@ -30,7 +30,7 @@ helm_deploy:
       --tiller-namespace dev
       --namespace dev
       --set image.tag=develop
-      --set ingress.hosts[0]=gaslessrelay.dev.closecross.com
+      --set ingress.hosts[0].host=gaslessrelay.dev.closecross.com
       tabookey-relay-server cc-charts/tabookey-relay-server
   when: manual
   only:
