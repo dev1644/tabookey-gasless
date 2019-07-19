@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-echo $registrationURL
-
 if [ -z "$registrationURL" ]; then
 	registrationURL="http://localhost:8090"
 fi
@@ -29,7 +27,10 @@ else
 	echo "use '$0 help' for usage."
 fi
 
-echo $registrationURL
+echo registrationURL - $registrationURL
+echo provider - $provider
+echo gasLimit - $gasLimit
+echo defaultGasPrice - $defaultGasPrice
 
 function onexit() {
 	echo onexit
@@ -88,7 +89,7 @@ relayurl=http://localhost:8090
 ( sleep 5 ; ./scripts/fundrelay.js $hubaddr $relayurl 0 ) &
 
 
-$gobin/RelayHttpServer -RelayHubAddress $hubaddr -Workdir $root/build/server -RegistrationURL -$registrationURL
+$gobin/RelayHttpServer -RelayHubAddress $hubaddr -Workdir $root/build/server -RegistrationURL $registrationURL
 
 else
 
