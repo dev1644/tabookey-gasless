@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+echo $registrationURL
+
 if [ -z "$registrationURL" ]; then
 	registrationURL="http://localhost:8090"
 fi
@@ -26,6 +28,8 @@ exit 1
 else 
 	echo "use '$0 help' for usage."
 fi
+
+echo $registrationURL
 
 function onexit() {
 	echo onexit
