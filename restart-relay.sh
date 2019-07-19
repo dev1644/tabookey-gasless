@@ -1,5 +1,21 @@
 #!/bin/bash -e
 
+if [ -z "$registrationURL" ]; then
+	registrationURL="http://localhost:8090"
+fi
+
+if [ -z "$provider" ]; then
+	provider="http://localhost:8545"
+fi
+
+if [ -z "$gasLimit" ]; then
+	gasLimit="100000"
+fi
+
+if [ -z "$defaultGasPrice" ]; then
+	defaultGasPrice="10000000000"
+fi
+
 if [ "$1" == "help" ]; then
 
 echo Usage:
@@ -68,25 +84,9 @@ relayurl=http://localhost:8090
 ( sleep 5 ; ./scripts/fundrelay.js $hubaddr $relayurl 0 ) &
 
 
-$gobin/RelayHttpServer -RelayHubAddress $hubaddr -Workdir $root/build/server -RegistrationURL http://localhost:8090
+$gobin/RelayHttpServer -RelayHubAddress $hubaddr -Workdir $root/build/server -RegistrationURL REGISTRATIONURL
 
 else
-if [ -z "$registrationURL" ]; then
-	registrationURL="http://localhost:8090"
-fi
-
-if [ -z "$provider" ]; then
-	provider="http://localhost:8545"
-fi
-
-if [ -z "$gasLimit" ]; then
-	gasLimit="100000"
-fi
-
-if [ -z "$defaultGasPrice" ]; then
-	defaultGasPrice="10000000000"
-fi
-	
 
 $gobin/RelayHttpServer -RelayHubAddress $hubaddr -Workdir $root/build/server -RegistrationURL $registrationURL -EthereumNodeUrl $provider -GasLimit $gasLimit -DefaultGasPrice $defaultGasPrice
 	

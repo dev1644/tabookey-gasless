@@ -253,7 +253,7 @@ func (relay *RelayServer) RegisterRelay() (err error) {
 func (relay *RelayServer) sendRegisterTransaction() (tx *types.Transaction, err error) {
 	desc := fmt.Sprintf("RegisterRelay(address=%s, url=%s)", relay.RelayHubAddress.Hex(), relay.RegistrationURL)
 	tx, err = relay.sendDataTransaction(desc, func(auth *bind.TransactOpts) (*types.Transaction, error) {
-		return relay.rhub.RegisterRelay(auth, relay.Fee, relay.Url)
+		return relay.rhub.RegisterRelay(auth, relay.Fee, relay.RegistrationURL)
 	})
 	return
 }
@@ -329,7 +329,7 @@ func (relay *RelayServer) RegistrationDate() (when int64, err error) {
 		(iter.Event.Stake.Cmp(relay.StakeAmount) < 0) ||
 		//(iter.Event.Stake.Cmp(relay.StakeAmount) != 0) ||
 		//(iter.Event.UnstakeDelay.Cmp(relay.UnstakeDelay) != 0) ||
-		(iter.Event.Url != relay.Url) {
+		(iter.Event.Url != relay.RegistrationURL) {
 		return 0, fmt.Errorf("Could not receive RelayAdded() events for our relay")
 	}
 	lastRegisteredHeader, err := relay.Client.HeaderByNumber(context.Background(), big.NewInt(int64(iter.Event.Raw.BlockNumber)))
