@@ -84,7 +84,7 @@ relayurl=http://localhost:8090
 ( sleep 5 ; ./scripts/fundrelay.js $hubaddr $relayurl 0 ) &
 
 
-$gobin/RelayHttpServer -RelayHubAddress $hubaddr -Workdir $root/build/server -RegistrationURL REGISTRATIONURL
+$gobin/RelayHttpServer -RelayHubAddress $hubaddr -Workdir $root/build/server -RegistrationURL -$registrationURL
 
 else
 
