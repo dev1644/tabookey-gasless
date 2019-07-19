@@ -29,6 +29,7 @@ helm_deploy:
     - helm upgrade --install
       --tiller-namespace dev
       --namespace dev
+      --values env_vars/dev.yml
       --set image.tag=develop
       --set ingress.hosts[0].host=gaslessrelay.dev.closecross.com
       --set ingress.hosts[0].paths[0]="/"
