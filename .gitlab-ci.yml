@@ -1,14 +1,14 @@
 stages:
-  - build
-  - deploy
+  - dev
+  - prod
 
 variables:
   CHART_NAME: tabookey-relay-server
   ECR_REPO: 959807571188.dkr.ecr.eu-west-1.amazonaws.com/tabookey-relay-server
 
 
-build_docker_image:
-  stage: build
+dev_build_docker_image:
+  stage: dev
   script:
     - $(aws ecr get-login --no-include-email --region eu-west-1)
     - docker build -t ${CHART_NAME} .
@@ -19,8 +19,8 @@ build_docker_image:
     - develop
 
 
-helm_deploy:
-  stage: deploy
+dev_helm_deploy:
+  stage: dev
   script:
     - aws --profile cc-dev eks update-kubeconfig --name cc-dev-eks --region eu-west-1
     - helm init --service-account tiller --tiller-namespace dev --client-only
