@@ -1,7 +1,3 @@
 env_variables:
-  - name: PROVIDER
-    value: "http://localhost:8545"
-  - name: RELAYHUBADDR
-    value: "0x0000000000000000000000000000000000000000"
-  - name: REGISTRATIONURL
-    value: "http://localhost:8090"
+  - name: registrationURL
+    value: "http://gaslessrelay.dev.closecross.com"
