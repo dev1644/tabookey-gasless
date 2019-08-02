@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+mnemonic="duck"
+
 if [ -z "$registrationURL" ]; then
 	registrationURL="http://localhost:8090"
 fi
@@ -59,7 +61,7 @@ pkill -f RelayHttpServer && echo kill old relayserver
 
 if [ "$withOutGanache" != "true" ]; then
 
-GANACHE="$root/node_modules/.bin/ganache-cli -l 8000000 -b $blocktime -a 11 -h 0.0.0.0 "
+GANACHE="$root/node_modules/.bin/ganache-cli -l 8000000 -b $blocktime -a 11 -h 0.0.0.0 -m $mnemonic"
 
 if [ -n "$DEBUG" ]; then
 	$GANACHE -d --verbose &
